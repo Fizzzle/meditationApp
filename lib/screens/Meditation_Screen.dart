@@ -7,16 +7,63 @@ class MeditationAppScreen extends StatefulWidget {
 }
 
 class _MeditationAppScreenState extends State<MeditationAppScreen> {
-  final Item audioItem = Item(
-    'forest',
-    'meditation_audios/forest.mp3',
-    'meditation_images/forest.jpeg',
-  );
+  final List<Item> items = [
+    Item(
+      "Forest",
+      "meditation_images/forest.jpeg",
+      "meditation_audios/forest.mp3",
+    ),
+    Item(
+      "Night",
+      "meditation_images/night.jpeg",
+      "meditation_audios/night.mp3",
+    ),
+    Item(
+      "Ocean",
+      "meditation_images/ocean.jpeg",
+      "meditation_audios/ocean.mp3",
+    ),
+    Item(
+      "Waterfall",
+      "meditation_images/waterfall.jpeg",
+      "meditation_audios/waterfall.mp3",
+    ),
+    Item(
+      "Wind",
+      "meditation_images/wind.jpeg",
+      "meditation_audios/wind.mp3",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Container()),
+      body: SafeArea(
+        child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(items[index].imagePath),
+                    ),
+                  ),
+                  child: ListTile(
+                    title: Text(items[index].name),
+                    // leading: IconButton(
+                    //   icon: Icon(Icons.play_arrow),
+                    //   onPressed: () {},
+                    // ),
+                  ),
+                ),
+              );
+            }),
+      ),
     );
   }
 }
