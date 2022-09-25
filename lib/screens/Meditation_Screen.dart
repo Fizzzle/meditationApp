@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meditationapp/models/item_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+// import 'package:just_audio/just_audio.dart';
 
 class MeditationAppScreen extends StatefulWidget {
+  const MeditationAppScreen({Key? key}) : super(key: key);
+
   @override
   State<MeditationAppScreen> createState() => _MeditationAppScreenState();
 }
@@ -35,6 +40,18 @@ class _MeditationAppScreenState extends State<MeditationAppScreen> {
     ),
   ];
 
+  // final AudioPlayer audioPlayer = AudioPlayer();
+
+  int? playingIndex;
+
+  // Widget showIcon(int currentIndex) {
+  //   if (playingIndex == currentIndex) {
+  //     return FaIcon(FontAwesomeIcons.stop);
+  //   } else {
+  //     return FaIcon(FontAwesomeIcons.play);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +72,28 @@ class _MeditationAppScreenState extends State<MeditationAppScreen> {
                   ),
                   child: ListTile(
                     title: Text(items[index].name),
-                    // leading: IconButton(
-                    //   icon: Icon(Icons.play_arrow),
-                    //   onPressed: () {},
-                    // ),
+                    leading: IconButton(
+                      // icon: showIcon(index),
+                      icon: playingIndex == index
+                          ? FaIcon(FontAwesomeIcons.stop)
+                          : FaIcon(FontAwesomeIcons.play),
+                      onPressed: () {
+                        if (playingIndex == index) {
+                          // audioPlayer.stop();
+
+                          setState(() {
+                            playingIndex = null;
+                          });
+                        } else {
+                          // audioPlayer.setAsset(items[index].audioPath);
+
+                          // audioPlayer.play();
+                          setState(() {
+                            playingIndex = index;
+                          });
+                        }
+                      },
+                    ),
                   ),
                 ),
               );
